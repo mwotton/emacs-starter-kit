@@ -43,7 +43,7 @@
 (require 'uniquify)
 (require 'ansi-color)
 (require 'recentf)
-
+(server-start)
 ;; backport some functionality to Emacs 22 if needed
 (require 'dominating-file)
 
@@ -74,3 +74,14 @@
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 
 ;;; init.el ends here
+
+;;; ;; set up paths
+;; (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+;;     (let* ((my-lisp-dir "/Users/mwotton/.emacs.d/vendor/")
+;;            (default-directory my-lisp-dir))
+;;       (setq load-path (cons my-lisp-dir load-path))
+;;       (normal-top-level-add-subdirs-to-load-path)))
+;; (add-to-list 'exec-path "/Users/mwotton/.cabal/bin/")
+
+
+
