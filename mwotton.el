@@ -3,6 +3,8 @@
 (color-theme-initialize)
 (color-theme-clarity)
 
+
+
 (add-to-list 'exec-path "/Users/mwotton/.cabal/bin/")
 exec-path
 ;; ido stuff
@@ -65,3 +67,4 @@ exec-path
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
+;; (global-set-key [(shift up)] 'set-mark-command)
