@@ -1,0 +1,3 @@
+[submodule "ghc-mod"]
+	path = ghc-mod
+	url = git@github.com:mwotton/ghc-mod.git
