@@ -33,10 +33,10 @@ exec-path
 (add-to-list 'completion-ignored-extensions ".o")
 (load "/Users/mwotton/.emacs.d/elpa-to-submit/haskell-site-file")
 (add-to-list 'load-path "/Users/mwotton/.emacs.d/elpa-to-submit/ghc-mod/")
-(require 'ghc)
-(autoload 'ghc-init "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (require 'ghc)
+;;(autoload 'ghc-init "ghc" nil t)
+;;(add-hook 'haskell-mode-hook (lambda () (ghc-init) (flymake-mode)))
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
 
 (defun credmp/flymake-display-err-minibuf () 
@@ -95,3 +95,7 @@ exec-path
 (global-set-key [f7] 'compile)
 
 (set-default-font "-apple-Anonymous_Pro-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+(server-start)
+(require 'inf-ruby)
+(require 'php-mode)
+(require 'groovy-mode)
