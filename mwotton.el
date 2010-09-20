@@ -17,6 +17,13 @@ exec-path
     (let (cmd-list)
       (mapatoms (lambda (S) (when (commandp S) (setq cmd-list (cons (format "%S" S) cmd-list)))))
       cmd-list)))))
+
+;; map both option and command to meta
+(setq mac-option-key-is-meta t)
+(setq mac-command-key-is-meta t)
+(setq mac-command-modifier 'meta)
+(setq mac-option-modifier 'meta)
+
 (global-set-key "\M-x" 'ido-execute)
 
 
@@ -76,7 +83,8 @@ exec-path
 (setq mode-compile-always-save-buffer-p t)
 ;; make the compile window stick at 12 lines tall
 (setq compilation-window-height 40)`
- 
+
+(project-show-current-name)
 ;; from enberg on #emacs
 ;; if the compilation has a zero exit code, 
 ;; the windows disappears after two seconds
@@ -99,3 +107,18 @@ exec-path
 (require 'inf-ruby)
 (require 'php-mode)
 (require 'groovy-mode)
+
+(require 'levenshtein)
+;; some groovy stuff
+(require 'project-mode)
+(require 'grails-mode)
+(setq grails-mode t)
+(setq project-mode t)
+(add-to-list 'auto-mode-alist '("\.gsp$" . nxml-mode)) ; Use whatever mode you want for views.
+(project-load-all) ; Loads all saved projects. Recommended, but not required.
+
+(require 'inf-groovy)
+
+
+(require 'csharp-mode)
+;; (require 'flymake-for-csharp)
