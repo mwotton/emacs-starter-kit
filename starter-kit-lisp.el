@@ -58,10 +58,18 @@
 
 (eval-after-load 'clojure-mode
   '(font-lock-add-keywords
-    'clojure-mode `(("(?\\(fn\\>\\)"
+    'clojure-mode `(("(\\(fn\\>\\)"
                      (0 (progn (compose-region (match-beginning 1)
                                                (match-end 1) "ƒ")
                                nil))))))
+
+(eval-after-load 'slime
+  '(define-key slime-mode-map (kbd "C-c p")
+     'slime-pprint-eval-last-expression))
+
+(eval-after-load 'slime-repl
+  '(define-key slime-repl-mode-map (kbd "C-c p")
+     'slime-pprint-eval-last-expression))
 
 (provide 'starter-kit-lisp)
 ;; starter-kit-lisp.el ends here
