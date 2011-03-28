@@ -23,9 +23,14 @@ exec-path
 (setq mac-command-key-is-meta t)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'meta)
+(setq mac-shift-key-is-meta nil)
 
 (global-set-key "\M-x" 'ido-execute)
 
+;; (font-lock-add-keywords
+;;  'c++-mode
+;;  '(("\\<\\(FIXME\\)" 1 font-lock-warning-face t)))
+;; (modify-face (quote font-lock-warning-face) "Red" "yellow" nil t nil t nil nil)
 
 
 (setq ido-enable-flex-matching t)
