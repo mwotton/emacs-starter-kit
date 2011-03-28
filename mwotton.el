@@ -112,23 +112,12 @@
 (server-start)
 (require 'inf-ruby)
 (require 'php-mode)
-(require 'groovy-mode)
 
 (require 'levenshtein)
-;; some groovy stuff
-(require 'project-mode)
-(require 'grails-mode)
-(setq grails-mode t)
-(setq project-mode t)
+
+
 (add-to-list 'auto-mode-alist '("\.gsp$" . nxml-mode)) ; Use whatever mode you want for views.
-(project-load-all) ; Loads all saved projects. Recommended, but not required.
 
-
-(require 'inf-groovy)
-
-
-(require 'csharp-mode)
-;; (require 'flymake-for-csharp)
 ;; (add-to-list 'load-path "~/.emacs.d/elisp/feature-mode")
 ;; ;; optional configurations
 ;; ;; default language if .feature doesn't have "# language: fi"
@@ -140,4 +129,4 @@
 ;(require 'feature-mode)
 ;(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 ;(setq feature-default-language "en")
-	(require 'objc-c-mode)
+
