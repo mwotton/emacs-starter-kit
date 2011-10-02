@@ -3,8 +3,6 @@
 (color-theme-initialize)
 (color-theme-clarity)
 
-
-
 (add-to-list 'exec-path "/Users/mwotton/.cabal/bin/")
 (add-to-list 'exec-path "/usr/local/bin/")
 
@@ -27,12 +25,6 @@
 (setq mac-shift-key-is-meta nil)
 
 (global-set-key "\M-x" 'ido-execute)
-
-;; (font-lock-add-keywords
-;;  'c++-mode
-;;  '(("\\<\\(FIXME\\)" 1 font-lock-warning-face t)))
-;; (modify-face (quote font-lock-warning-face) "Red" "yellow" nil t nil t nil nil)
-
 
 (setq ido-enable-flex-matching t)
 (setq debug-on-quit nil)
@@ -73,14 +65,16 @@
 (global-set-key "\C-cd"
  'credmp/flymake-display-err-minibuf)
 
+  (setq haskell-program-name "/usr/bin/ghci")
+
+
 
 
 ;;; random hacks
-
+(global-set-key "\C-c\C-c" 'comment-or-uncomment-region)
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
-;; (global-set-key [(shift up)] 'set-mark-command)
 
 (require 'compile)
  
@@ -95,27 +89,36 @@
 ;; if the compilation has a zero exit code, 
 ;; the windows disappears after two seconds
 ;; otherwise it stays
-(setq compilation-finish-function
-      (lambda (buf str)
-        (unless (string-match "exited abnormally" str)
-          ;;no errors, make the compilation window go away in a few seconds
-          (run-at-time
-           "2 sec" nil 'delete-windows-on
-           (get-buffer-create "*compilation*"))
-          (message "No Compilation Errors!"))))
+;; (setq compilation-finish-function
+;;       (lambda (buf str)
+;;         (unless (string-match "exited abnormally" str)
+;;           ;;no errors, make the compilation window go away in a few seconds
+;;           (run-at-time
+;;            "2 sec" nil 'delete-windows-on
+;;            (get-buffer-create "*compilation*"))
+;;           (message "No Compilation Errors!"))))
  
  
 ;; one-button testing, tada!
 (global-set-key [f7] 'compile)
 
-(set-default-font "-apple-Anonymous_Pro-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
+(set-frame-font "-apple-Anonymous_Pro-medium-normal-normal-*-18-*-*-*-m-0-iso10646-1")
 (server-start)
 (require 'inf-ruby)
 (require 'php-mode)
 
 (require 'levenshtein)
+(set-default 'tramp-default-proxies-alist (quote ((".*" "\\`root\\'" "/sudo:%h:"))))
 
+(require 'coffee-mode)
+(defun coffee-custom ()
+  "coffee-mode-hook"
+ (set (make-local-variable 'tab-width) 2))
 
+(add-hook 'coffee-mode-hook
+          '(lambda() (coffee-custom)))
+
+(require 'perspective)
 (add-to-list 'auto-mode-alist '("\.gsp$" . nxml-mode)) ; Use whatever mode you want for views.
 
 ;; (add-to-list 'load-path "~/.emacs.d/elisp/feature-mode")
@@ -130,3 +133,26 @@
 ;(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 ;(setq feature-default-language "en")
 
+
+(require 'hs-lint)
+(defun my-haskell-mode-hook ()
+  (local-set-key "\C-c \C-l" 'hs-lint))
+(add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
+(setq ispell-program-name "/usr/local/bin/aspell")
+
+
+;; folding stuff
+
+
+;;; enables outlining for ruby
+;;; You may also want to bind hide-body, hide-subtree, show-substree,
+;;; show-all, show-children, ... to some keys easy folding and unfolding
+(add-hook 'ruby-mode-hook
+              '(lambda ()
+                 (outline-minor-mode)
+                 (setq outline-regexp " *\\(def \\|class\\|module\\|describe\\|it\\)")))
